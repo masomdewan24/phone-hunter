@@ -8,7 +8,14 @@ displayPhone(data.data)
 const displayPhone = phones =>{
    const phoneContainer = document.getElementById('phone-container');
    phoneContainer.textContent = "";
-   phones = phones.slice(0,2);
+   phones = phones.slice(0,10);
+   const noPhone = document.getElementById('no-phone-msg');
+   if(phones.length === 0){
+    noPhone.classList.remove('d-none')
+   }
+   else{
+    noPhone.classList.add('d-none')
+   }
    phones.forEach(phone =>{
     const phoneDiv = document.createElement('div');
     phoneDiv.classList.add('col');
@@ -33,4 +40,8 @@ document.getElementById('btn-search').addEventListener('click', function(){
     lodePhone(searchText);
 })
 
-lodePhone()
+const togolLoder = isLoding =>{
+    const loderSection = document.getElementById('loder')
+   loderSection.classList.remove('d-none')
+}
+// lodePhone()
