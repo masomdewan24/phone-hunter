@@ -35,7 +35,7 @@ const displayPhone = (phones, datalimite) =>{
             <div class="card-body">
                   <h5 class="card-title">${phone.phone_name}</h5>
                   <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                  <button onclick="lodePhoneDeatiles('${phones.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDeatileModal">Show Details</button>
+                  <button onclick="lodePhoneDeatiles('${phone.slug}')" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#phoneDeatileModal">Show Details</button>
             
                   
 
@@ -79,12 +79,24 @@ const togolLoder = isLoding =>{
 };
 document.getElementById('btn-show-all').addEventListener('click', function(){
 processSearch()
-});
+})
 
 const lodePhoneDeatiles = async id =>{
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data);
+    displayPhoneDeatiles(data.data);
+}
+
+const displayPhoneDeatiles = phone =>{
+console.log(phone);
+const modelTitle = document.getElementById('phoneDeatileModalLabel');
+modelTitle.innerText = phone.name;
+const phoneDeatiles = document.getElementById('phone-deatiles');
+phoneDeatiles.innerHTML = `
+<p>Releas Date: ${phone.releaseDate ? phone.releaseDate : 'No Release date found'} </p>
+<p>Memory: ${phone.mainFeatures ? phone.mainFeatures.memory : 'Memory not found'} </p>
+<p>others: ${phone.others ? phone.others.Bluetooth : 'Others futhers not found'} </p>
+`;
 }
 // lodePhone()
